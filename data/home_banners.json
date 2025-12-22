@@ -1,0 +1,53 @@
+{
+  "banners": [
+    {
+      "id": "b1",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/WhatsAppImage2025-07-27at203457_225f1c7a-1764403032345-753974312.jpg",
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "id": "b2",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/WhatsAppImage2025-07-28at152726_2aed0e33-1764149922311-169250501.jpg",
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "id": "b3",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/img-1764149939495-54265248.png",
+      "enabled": true,
+      "order": 3
+    },
+    {
+      "id": "b4",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/WhatsAppImage2025-10-04at63649PM-1764531138994-77271022.jpeg",
+      "enabled": true,
+      "order": 4
+    },
+    {
+      "id": "b5",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/ChatGPTImageOct13202506_13_44PM-1764598235622-888979331.png",
+      "enabled": true,
+      "order": 5
+    },
+    {
+      "id": "b6",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/ChatGPTImageNov30202502_36_51PM-1764598590452-756677468.png",
+      "enabled": true,
+      "order": 6
+    },
+    {
+      "id": "b7",
+      "title": "بنر جديد",
+      "imageUrl": "/uploads/WhatsAppImage2025-12-15at14704PM-1766315807664-881868242.jpeg",
+      "enabled": true,
+      "order": 7
+    }
+  ]
+}

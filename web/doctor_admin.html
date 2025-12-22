@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة الموظف - Phoenix Clinic Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap RTL -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+  />
+  
+  <style>
+    :root {
+      --phoenix-primary: #2563eb;
+      --phoenix-secondary: #6366f1;
+      --phoenix-accent: #06b6d4;
+      --phoenix-bg: #0f172a;
+      --phoenix-card-bg: #ffffff;
+      --phoenix-muted: #6b7280;
+      --phoenix-border: #e5e7eb;
+      --phoenix-radius-xl: 24px;
+      --phoenix-radius-lg: 18px;
+      --phoenix-radius-pill: 999px;
+      --phoenix-shadow-strong:
+        0 24px 80px rgba(15, 23, 42, 0.14);
+      --phoenix-shadow-soft:
+        0 14px 40px rgba(15, 23, 42, 0.08);
+      --phoenix-transition-fast: 0.18s ease-out;
+      --phoenix-transition-med: 0.26s cubic-bezier(.22,.61,.36,1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.22), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(236,72,153,0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(45,212,191,0.16), transparent 55%),
+        #f3f4f6;
+    }
+
+    .navbar {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25) !important;
+      background: rgba(255,255,255,0.82) !important;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 35px rgba(15,23,42,0.05);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #111827 !important;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .navbar-brand::before {
+      content: "";
+      width: 26px;
+      height: 26px;
+      border-radius: 10px;
+      background: conic-gradient(
+        from 180deg,
+        #38bdf8,
+        #6366f1,
+        #ec4899,
+        #f97316,
+        #22c55e,
+        #38bdf8
+      );
+      box-shadow: 0 0 0 1px rgba(148,163,184,0.35),
+                  0 0 18px rgba(59,130,246,0.6);
+    }
+
+    .badge-doctor {
+      font-size: 0.75rem;
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      background: linear-gradient(120deg, #22c55e, #16a34a);
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.45);
+      color: #ecfdf5;
+      border: none;
+    }
+
+    .container {
+      max-width: 1200px;
+    }
+
+    .app-shell {
+      margin-top: 1.75rem;
+      margin-bottom: 2.5rem;
+      border-radius: var(--phoenix-radius-xl);
+      background: rgba(255,255,255,0.92);
+      box-shadow: var(--phoenix-shadow-strong);
+      border: 1px solid rgba(209,213,219,0.9);
+      padding: 1.75rem 1.8rem 2.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(59,130,246,0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(34,197,94,0.1), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .app-shell-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: flex-start;
+      margin-bottom: 1.6rem;
+    }
+
+    .top-header-main-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .top-header-main-title span.badge-chip {
+      font-size: 0.68rem;
+      border-radius: 999px;
+      padding: 0.18rem 0.7rem;
+      border: 1px solid #e5e7eb;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      background: #f9fafb;
+    }
+
+    .top-header-subtitle {
+      font-size: 0.92rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    #sectionTabs {
+      gap: 0.4rem;
+      padding: 0.3rem;
+      border-radius: 999px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 25px rgba(15,23,42,0.04);
+      align-items: center;
+    }
+
+    #sectionTabs .nav-item {
+      display: flex;
+      align-items: center;
+    }
+
+    #sectionTabs .nav-link {
+      border-radius: 999px;
+      font-size: 0.84rem;
+      padding: 0.35rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #6b7280;
+      transition: background var(--phoenix-transition-med),
+                  color var(--phoenix-transition-med),
+                  transform var(--phoenix-transition-fast),
+                  box-shadow var(--phoenix-transition-fast),
+                  border-color var(--phoenix-transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #sectionTabs .nav-link:hover {
+      color: #111827;
+      background: #eef2ff;
+      transform: translateY(-1px);
+      border-color: #e5e7eb;
+    }
+
+    #sectionTabs .nav-link.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--phoenix-primary), var(--phoenix-secondary));
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+      transform: translateY(-1px);
+    }
+
+    #sectionTabs .nav-link i {
+      font-size: 1rem;
+    }
+
+    .admin-section {
+      display: none;
+      animation: fadeIn 0.22s ease-out;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      box-shadow: var(--phoenix-shadow-soft);
+      border-radius: var(--phoenix-radius-lg);
+      border: 1px solid var(--phoenix-border);
+      background: var(--phoenix-card-bg);
+      color: #111827;
+    }
+
+    .card-header {
+      border-bottom: 1px solid #e5e7eb !important;
+      background: linear-gradient(135deg,#f9fafb,#eff6ff);
+    }
+
+    .card-header strong {
+      letter-spacing: 0.01em;
+    }
+
+    label.form-label {
+      font-size: 0.86rem;
+      color: #4b5563;
+    }
+
+    .form-select,
+    .form-control,
+    textarea.form-control {
+      font-size: 0.9rem;
+      background-color: #ffffff;
+      color: #111827;
+      border-radius: 11px;
+      border: 1px solid #e5e7eb;
+      transition: border-color var(--phoenix-transition-fast),
+                  box-shadow var(--phoenix-transition-fast),
+                  background-color var(--phoenix-transition-fast),
+                  transform var(--phoenix-transition-fast);
+    }
+
+    .form-select:focus,
+    .form-control:focus,
+    textarea.form-control:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 1px rgba(96,165,250,0.9), 0 0 0 4px rgba(191,219,254,0.7);
+      background-color: #ffffff;
+      transform: translateY(-0.5px);
+      color: #111827;
+    }
+
+    .time-input { max-width: 110px; }
+    .label-input { min-width: 160px; }
+    .doctor-select { max-width: 260px; }
+
+    .btn {
+      border-radius: var(--phoenix-radius-pill);
+      font-size: 0.85rem;
+      padding-inline: 1.1rem;
+      padding-block: 0.42rem;
+      border-width: 1px;
+      transition: transform var(--phoenix-transition-fast),
+                  box-shadow var(--phoenix-transition-fast),
+                  background var(--phoenix-transition-fast),
+                  border-color var(--phoenix-transition-fast),
+                  color var(--phoenix-transition-fast);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: none !important;
+    }
+
+    .btn-outline-primary {
+      border-color: #d1d5db;
+      color: #1f2937;
+      background: #f9fafb;
+    }
+
+    .btn-outline-primary:hover {
+      border-color: #93c5fd;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      box-shadow: 0 10px 20px rgba(37,99,235,0.25);
+      color: #1e40af;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-color: #16a34a;
+      box-shadow: 0 12px 30px rgba(22,163,74,0.35);
+      color: #f0fdf4;
+      font-weight: 600;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      border-color: #16a34a;
+      box-shadow: 0 14px 38px rgba(22,163,74,0.5);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--phoenix-primary), var(--phoenix-secondary));
+      border-color: #2563eb;
+      box-shadow: 0 14px 30px rgba(37,99,235,0.45);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #3b82f6, #818cf8);
+      box-shadow: 0 16px 40px rgba(37,99,235,0.6);
+    }
+
+    .btn-outline-danger {
+      border-radius: var(--phoenix-radius-pill);
+    }
+
+    .small-muted {
+      font-size: 0.82rem;
+      color: var(--phoenix-muted);
+    }
+
+    .alert {
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      font-size: 0.86rem;
+      padding-block: 0.55rem;
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    .alert-info {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .alert-success {
+      background: #ecfdf3;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .alert-danger {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #b91c1c;
+    }
+
+    .table {
+      color: #111827;
+      margin-bottom: 0;
+    }
+
+    .table thead th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid #e5e7eb;
+      background: linear-gradient(135deg, #eef2ff, #e5e7eb);
+      color: #4b5563;
+    }
+
+    .table tbody tr {
+      transition: background-color var(--phoenix-transition-fast),
+                  transform var(--phoenix-transition-fast),
+                  box-shadow var(--phoenix-transition-fast);
+    }
+
+    .table tbody tr:hover {
+      background-color: #f9fafb;
+      box-shadow: 0 1px 0 rgba(148,163,184,0.4);
+      transform: translateY(-1px);
+    }
+
+    .table tbody td {
+      border-color: #e5e7eb;
+      vertical-align: middle;
+      font-size: 0.88rem;
+    }
+
+    .banner-img-thumb {
+      width: 150px;
+      max-height: 86px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 28px rgba(15,23,42,0.08);
+      background: #f9fafb;
+    }
+
+    #emptyState,
+    #emptyServicesState,
+    #emptyBannersState {
+      font-size: 0.9rem;
+      color: var(--phoenix-muted);
+    }
+
+    #emptyState strong,
+    #emptyServicesState strong,
+    #emptyBannersState strong {
+      color: #111827;
+    }
+
+    #fcmBody {
+      min-height: 100px;
+    }
+
+    @media (max-width: 992px) {
+      .app-shell {
+        padding: 1.4rem 1rem 1.8rem;
+        border-radius: 18px;
+      }
+      #sectionTabs {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+      #sectionTabs .nav-link {
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .app-shell {
+        padding-inline: 0.75rem;
+      }
+      .card {
+        border-radius: 16px;
+      }
+    }
+/* إخفاء عمود الأطباء بالكامل عندما لا تكون عيادة الأسنان */
+td[data-col="doctors"].hidden-doctors {
+  display: none !important;
+}
+
+    
+  </style>
+</head>
+<body>
+  <!-- 🔒 شاشة قفل لوحة الموظف -->
+<div id="adminLock" style="
+  position: fixed;
+  inset: 0;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+">
+  <div style="
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    width: 320px;
+    text-align: center;
+  ">
+    <h5 id="lockTitle"> Admin Login</h5>
+
+   <input
+  id="adminPin"
+  type="password"
+  class="form-control my-2"
+  placeholder="Enter PIN"
+/>
+
+<input
+  id="adminOtp"
+  type="text"
+  class="form-control my-2 d-none"
+  placeholder="Enter verification code"
+/>
+
+<button
+  id="lockBtn"
+  class="btn btn-primary w-100"
+  onclick="startAdminAuth()"
+>
+  Continue
+</button>
+
+
+    <div id="lockMsg" class="text-danger mt-2" style="font-size:13px"></div>
+  </div>
+</div>
+
+  <!-- شريط علوي -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <span class="navbar-brand">لوحة الموظف - Phoenix Clinic</span>
+      <span class="badge badge-doctor">Staff Panel</span>
+    </div>
+  </nav>
+
+  <div class="container mb-5">
+    <div class="app-shell">
+      <div class="app-shell-inner">
+
+        <!-- ===== ترويسة + تبويبات ===== -->
+        <div class="top-header">
+          <div class="flex-grow-1">
+            <div class="top-header-main-title">
+              إدارة تطبيق مجمع فينكس
+              <span class="badge-chip">ADMIN DASHBOARD</span>
+            </div>
+            <div class="top-header-subtitle">
+              تحكم كامل 
+            </div>
+          </div>
+
+          <ul class="nav nav-pills ms-auto" id="sectionTabs">
+            <li class="nav-item">
+              <button class="nav-link active" data-section="periods">
+                <i class="bi bi-clock-history"></i>
+                فترات الأطباء
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" data-section="services">
+                <i class="bi bi-grid-3x3-gap"></i>
+                الخدمات
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" data-section="banners">
+                <i class="bi bi-images"></i>
+                بنرات الرئيسية
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" data-section="fcm">
+                <i class="bi bi-bell"></i>
+                إشعار FCM
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ========== القسم الأول: فترات الأطباء ========== -->
+        <section class="admin-section active" data-section="periods">
+          <div class="card mb-4">
+            <div class="card-body d-flex flex-wrap align-items-center gap-3">
+              <div>
+                <label class="form-label mb-1">اختر الطبيب / العيادة</label>
+                <select id="doctorSelect" class="form-select doctor-select">
+                  <option value="">-- اختر --</option>
+                  <option value="d_walaa">د. ولاء (جلدية)</option>
+                  <option value="d_laser_am">عيادة الليزر (فترة أولى)</option>
+                  <option value="d_laser_pm">عيادة الليزر (فترة ثانية)</option>
+                   <option value="d_laser_men_am">عيادة الليزر (رجال – فترة صباحية)</option>
+  <option value="d_laser_women_pm">عيادة الليزر (نساء – فترة مسائية)</option>
+                  <option value="d_clean_pm">عيادة تنظيف البشرة (فترة ثانية)</option>
+                  <option value="d_hasnaa">د. حسناء (نساء وولادة)</option>
+                  <option value="d_ryan">د. ريان (أسنان)</option>
+                  <option value="d_abeer">د. عبير (أسنان)</option>
+                  <option value="d_ahmed_pm">د. أحمد عبدالله خليل (أسنان)</option>
+
+                  <option value="d_general">طبيب عام</option>
+                  <option value="d_moath">د. معاذ (أسنان)</option>
+                  <option value="d_ronaldo">د. رونالدو (أسنان)</option>
+                </select>
+              </div>
+
+              <div class="ms-auto d-flex gap-2 align-items-end">
+                <button id="btnAddPeriod" class="btn btn-outline-primary" disabled>
+                  + إضافة فترة
+                </button>
+                <button id="btnSave" class="btn btn-success" disabled>
+                  💾 حفظ الفترات
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-2">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><strong>الفترات لهذا الطبيب</strong></span>
+              <small class="text-muted" id="currentDoctorLabel"></small>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info py-2 px-3 mb-3" id="helpAlert">
+                اختر الطبيب أولاً، ثم أضف الفترات (من / إلى) وحدد إذا كانت الجمعة مسموحة أو لا.
+              </div>
+
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th style="width: 5%">#</th>
+                      <th>وصف الفترة</th>
+                      <th>من</th>
+                      <th>إلى</th>
+                      <th>تفعيل</th>
+                      <th>السماح بالجمعة</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="periodsBody">
+                    <!-- JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="emptyState" class="text-center py-4 d-none">
+                لا توجد فترات محفوظة لهذا الطبيب بعد. اضغط
+                <strong>"إضافة فترة"</strong> لإضافة أول فترة.
+              </div>
+
+              <div id="statusArea" class="mt-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== القسم الثاني: إدارة الخدمات ========== -->
+        <section class="admin-section" data-section="services">
+          <div class="card mb-2">
+            <div class="card-header d-flex justify-content-between align-items-center">
+  <div>
+    <strong>إدارة الخدمات</strong>
+    <div class="small-muted">إضافة وتعديل وحذف خدمات العيادات وربطها بالأطباء.</div>
+  </div>
+  <div class="d-flex gap-2">
+    <button id="btnAddService" class="btn btn-outline-primary btn-sm">
+      + إضافة خدمة
+    </button>
+    <button id="btnSaveServices" class="btn btn-success btn-sm">
+      💾 حفظ الخدمات
+    </button>
+  </div>
+</div>
+
+
+            <div class="card-body">
+              <div class="alert alert-info py-2 px-3 mb-3" id="helpServices">
+                أضف اسم الخدمة، الوصف، مدة الخدمة، العيادة، الصورة، والأطباء المرتبطين بها.
+              </div>
+
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th style="width:5%">#</th>
+                      <th>اسم الخدمة</th>
+                      <th>الوصف</th>
+                      <th style="width:10%">المدة</th>
+                      <th style="width:12%">العيادة</th>
+                      <th style="width:12%">الأطباء</th>
+                      <th style="width:15%">الصورة</th>
+                      <th style="width:8%">مفعلة؟</th>
+                      <th style="width:8%"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="servicesBody">
+                    <!-- JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="emptyServicesState" class="text-center py-4 d-none">
+                لا توجد خدمات حتى الآن. اضغط <strong>"إضافة خدمة"</strong> لإضافة أول خدمة.
+              </div>
+
+              <div id="statusServices" class="mt-3"></div>
+
+              
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== القسم الثالث: إدارة البنرات ========== -->
+        <section class="admin-section" data-section="banners">
+          <div class="card mb-2">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div>
+                <strong>بنرات الصفحة الرئيسية (السلايدر)</strong>
+                <div class="small-muted">الصور التي تظهر في الصفحة الرئيسية داخل التطبيق.</div>
+              </div>
+              <div class="d-flex gap-2">
+                <button id="btnAddBanner" class="btn btn-outline-primary btn-sm">
+                  + إضافة بنر
+                </button>
+                <button id="btnSaveBanners" class="btn btn-success btn-sm">
+                  💾 حفظ البنرات
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info py-2 px-3 mb-3" id="helpBanners">
+                يمكنك إضافة صور بنرات مع رابط الصورة (URL)، تفعيل/تعطيل البنر، وتحديد ترتيب العرض.
+              </div>
+
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th style="width:5%">#</th>
+                      <th style="width:18%">معاينة</th>
+                      <th>عنوان داخلي</th>
+                      <th>رابط الصورة (URL)</th>
+                      <th style="width:10%">ترتيب</th>
+                      <th style="width:10%">مفعل؟</th>
+                      <th style="width:8%"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="bannersBody">
+                    <!-- JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="emptyBannersState" class="text-center py-4 d-none">
+                لا توجد بنرات حالياً. اضغط <strong>"إضافة بنر"</strong> لإضافة أول صورة للصفحة الرئيسية.
+              </div>
+
+              <div id="statusBanners" class="mt-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== القسم الرابع: FCM ========== -->
+        <section class="admin-section" data-section="fcm">
+          <div class="card">
+            <div class="card-header">
+              <strong>إرسال إشعار لكل مستخدمي التطبيق</strong>
+            </div>
+            <div class="card-body">
+              <div id="fcmStatus" class="mb-2"></div>
+
+              <div class="mb-2">
+                <label class="form-label">عنوان الإشعار (اختياري)</label>
+                <input
+                  type="text"
+                  id="fcmTitle"
+                  class="form-control"
+                  placeholder="مثال: عرض خاص على تنظيف البشرة"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">نص الإشعار</label>
+                <textarea
+                  id="fcmBody"
+                  class="form-control"
+                  rows="3"
+                  placeholder="اكتب نص الإشعار هنا..."
+                ></textarea>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="sendFcmBroadcast()"
+              >
+                إرسال الإشعار لجميع المستخدمين
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== سكربت الفترات + البنرات ========== -->
+  <script>
+  const BASE_URL = 'http://localhost:3000';
+
+  const doctorSelect = document.getElementById('doctorSelect');
+  const btnAddPeriod = document.getElementById('btnAddPeriod');
+  const btnSave = document.getElementById('btnSave');
+  const periodsBody = document.getElementById('periodsBody');
+  const emptyState = document.getElementById('emptyState');
+  const statusArea = document.getElementById('statusArea');
+  const currentDoctorLabel = document.getElementById('currentDoctorLabel');
+  const helpAlert = document.getElementById('helpAlert');
+
+  let currentDoctorId = null;
+  let periods = [];
+
+  function showStatus(message, type = 'success') {
+    statusArea.innerHTML = `
+      <div class="alert alert-${type} py-2 px-3 mb-0">${message}</div>
+    `;
+    setTimeout(() => {
+      statusArea.innerHTML = '';
+    }, 4000);
+  }
+
+  function renderTable() {
+    periodsBody.innerHTML = '';
+    if (!periods.length) {
+      emptyState.classList.remove('d-none');
+      return;
+    }
+    emptyState.classList.add('d-none');
+
+    periods.forEach((p, idx) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${idx + 1}</td>
+        <td>
+          <input type="text" class="form-control form-control-sm label-input"
+            value="${p.label || ''}" data-field="label" />
+        </td>
+        <td>
+          <input type="time" class="form-control form-control-sm time-input"
+            value="${p.from || ''}" data-field="from" />
+        </td>
+        <td>
+          <input type="time" class="form-control form-control-sm time-input"
+            value="${p.to || ''}" data-field="to" />
+        </td>
+        <td class="text-center">
+          <input type="checkbox" data-field="enabled" ${p.enabled !== false ? 'checked' : ''} />
+        </td>
+        <td class="text-center">
+          <input type="checkbox" data-field="allowFriday" ${p.allowFriday ? 'checked' : ''} />
+        </td>
+        <td class="text-end">
+          <button class="btn btn-sm btn-outline-danger btn-remove">حذف</button>
+        </td>
+      `;
+
+      tr.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const field = e.target.dataset.field;
+          if (field === 'enabled' || field === 'allowFriday') {
+            periods[idx][field] = e.target.checked;
+          } else {
+            periods[idx][field] = e.target.value;
+          }
+        });
+      });
+
+      tr.querySelector('.btn-remove').addEventListener('click', () => {
+        periods.splice(idx, 1);
+        renderTable();
+      });
+
+      periodsBody.appendChild(tr);
+    });
+  }
+
+  async function loadDoctorPeriods(id) {
+    if (!id) return;
+    try {
+      statusArea.innerHTML = '';
+      helpAlert.classList.add('d-none');
+      const res = await fetch(`${BASE_URL}/api/admin/doctor-periods/${id}`);
+      const data = await res.json();
+      periods = Array.isArray(data.periods) ? data.periods : [];
+      renderTable();
+      showStatus('تم تحميل الفترات لهذا الطبيب.', 'info');
+    } catch (err) {
+      console.error(err);
+      showStatus('حدث خطأ أثناء تحميل الفترات.', 'danger');
+    }
+  }
+
+  async function saveDoctorPeriods() {
+    if (!currentDoctorId) return;
+    try {
+      const clean = periods
+        .map((p, idx) => ({
+          id: p.id || `p${idx + 1}`,
+          label: p.label || '',
+          from: p.from || '',
+          to: p.to || '',
+          enabled: p.enabled !== false,
+          allowFriday: !!p.allowFriday,
+        }))
+        .filter((p) => p.from && p.to);
+
+      const res = await fetch(
+        `${BASE_URL}/api/admin/doctor-periods/${currentDoctorId}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ periods: clean }),
+        }
+      );
+
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      periods = Array.isArray(data.periods) ? data.periods : clean;
+      renderTable();
+      showStatus('تم حفظ الفترات بنجاح ✅', 'success');
+    } catch (err) {
+      console.error(err);
+      showStatus('فشل حفظ الفترات. تأكد أن السيرفر يعمل.', 'danger');
+    }
+  }
+
+  function addNewPeriodRow() {
+    if (!currentDoctorId) return;
+    periods.push({
+      id: 'p' + (periods.length + 1),
+      label: 'فترة جديدة',
+      from: '15:00',
+      to: '21:00',
+      enabled: true,
+      allowFriday: false,
+    });
+    renderTable();
+  }
+
+  doctorSelect.addEventListener('change', (e) => {
+    currentDoctorId = e.target.value || null;
+    periods = [];
+    renderTable();
+    if (currentDoctorId) {
+      btnAddPeriod.disabled = false;
+      btnSave.disabled = false;
+      currentDoctorLabel.textContent = `الطبيب: ${doctorSelect.selectedOptions[0].textContent}`;
+      loadDoctorPeriods(currentDoctorId);
+    } else {
+      btnAddPeriod.disabled = true;
+      btnSave.disabled = true;
+      currentDoctorLabel.textContent = '';
+      helpAlert.classList.remove('d-none');
+    }
+  });
+
+  btnAddPeriod.addEventListener('click', addNewPeriodRow);
+  btnSave.addEventListener('click', saveDoctorPeriods);
+
+  /* ========== بنرات الصفحة الرئيسية ========== */
+
+  const bannersBody       = document.getElementById('bannersBody');
+  const emptyBannersState = document.getElementById('emptyBannersState');
+  const statusBanners     = document.getElementById('statusBanners');
+  const btnAddBanner      = document.getElementById('btnAddBanner');
+  const btnSaveBanners    = document.getElementById('btnSaveBanners');
+
+  let banners = [];
+
+  function normalizeUploadedUrl(url) {
+    if (!url) return url;
+    try {
+      return url.replace(/^https?:\/\/[^/]+/, '');
+    } catch (e) {
+      return url;
+    }
+  }
+
+  function showBannersStatus(message, type = 'success') {
+    statusBanners.innerHTML = `
+      <div class="alert alert-${type} py-2 px-3 mb-0">${message}</div>
+    `;
+    setTimeout(() => {
+      statusBanners.innerHTML = '';
+    }, 4000);
+  }
+
+  function renderBannersTable() {
+    bannersBody.innerHTML = '';
+    if (!banners.length) {
+      emptyBannersState.classList.remove('d-none');
+      return;
+    }
+    emptyBannersState.classList.add('d-none');
+
+    banners
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .forEach((b, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>
+            <img src="${b.imageUrl || ''}"
+                 class="banner-img-thumb mb-1"
+                 onerror="this.src='https://via.placeholder.com/150x86?text=No+Image';" />
+            <div class="small-muted mb-1">
+              تظهر في التطبيق كما في المعاينة.
+            </div>
+            <div class="d-flex flex-column gap-1">
+              <input type="file"
+                     class="form-control form-control-sm banner-file-input"
+                     accept="image/*" />
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary btn-upload-banner">
+                رفع صورة لهذا البنر
+              </button>
+            </div>
+          </td>
+          <td>
+            <input type="text"
+                   class="form-control form-control-sm"
+                   value="${b.title || ''}"
+                   data-field="title" />
+          </td>
+          <td>
+            <input type="text"
+                   class="form-control form-control-sm banner-url-input"
+                   value="${b.imageUrl || ''}"
+                   data-field="imageUrl"
+                   placeholder="https://..." />
+          </td>
+          <td>
+            <input type="number"
+                   class="form-control form-control-sm"
+                   value="${b.order ?? (idx + 1)}"
+                   data-field="order"
+                   min="1" />
+          </td>
+          <td class="text-center">
+            <input type="checkbox"
+                   data-field="enabled"
+                   ${b.enabled !== false ? 'checked' : ''} />
+          </td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-danger btn-remove-banner">
+              حذف
+            </button>
+          </td>
+        `;
+
+        tr.querySelectorAll('input[data-field]').forEach((input) => {
+          input.addEventListener('change', (e) => {
+            const field = e.target.dataset.field;
+            if (field === 'enabled') {
+              banners[idx][field] = e.target.checked;
+            } else if (field === 'order') {
+              banners[idx][field] = parseInt(e.target.value || (idx + 1), 10);
+            } else {
+              banners[idx][field] = e.target.value;
+            }
+          });
+        });
+
+        tr.querySelector('.btn-remove-banner').addEventListener('click', () => {
+          banners.splice(idx, 1);
+          renderBannersTable();
+        });
+
+        const fileInput = tr.querySelector('.banner-file-input');
+        const uploadBtn = tr.querySelector('.btn-upload-banner');
+        const urlInput  = tr.querySelector('.banner-url-input');
+        const imgThumb  = tr.querySelector('.banner-img-thumb');
+
+        uploadBtn.addEventListener('click', async () => {
+          const file = fileInput.files[0];
+          if (!file) {
+            alert('اختر صورة أولاً لهذا البنر');
+            return;
+          }
+
+          const fd = new FormData();
+          fd.append('file', file);
+
+          uploadBtn.disabled = true;
+          uploadBtn.textContent = 'جاري الرفع...';
+
+          try {
+            const res = await fetch(`${BASE_URL}/api/content/upload-image`, {
+              method: 'POST',
+              body: fd,
+            });
+
+            const data = await res.json();
+            if (data.ok && data.url) {
+              let relative = normalizeUploadedUrl(data.url);
+              relative = relative.replace(/\/+$/,'');
+              if (!relative.startsWith('/')) relative = '/' + relative;
+              if (!relative.startsWith('/uploads/')) {
+                const fname = relative.split('/').pop() || '';
+                relative = '/uploads/' + fname;
+              }
+
+              urlInput.value        = relative;
+              banners[idx].imageUrl = relative;
+              imgThumb.src          = relative;
+
+              showBannersStatus('تم رفع صورة البنر بنجاح', 'success');
+            } else {
+              alert('فشل رفع الصورة: ' + (data.error || ''));
+            }
+          } catch (e) {
+            console.error(e);
+            alert('خطأ في الشبكة أثناء رفع الصورة');
+          } finally {
+            uploadBtn.disabled = false;
+            uploadBtn.textContent = 'رفع صورة لهذا البنر';
+          }
+        });
+
+        bannersBody.appendChild(tr);
+      });
+  }
+
+  async function loadBanners() {
+    try {
+      statusBanners.innerHTML = '';
+      const res  = await fetch(`${BASE_URL}/api/content/home-banners`);
+      const data = await res.json();
+      banners    = Array.isArray(data.banners) ? data.banners : [];
+      renderBannersTable();
+      showBannersStatus('تم تحميل البنرات الحالية.', 'info');
+    } catch (err) {
+      console.error(err);
+      showBannersStatus('حدث خطأ أثناء تحميل البنرات.', 'danger');
+    }
+  }
+
+  async function saveBanners() {
+    try {
+      const clean = banners
+        .map((b, idx) => ({
+          id:      b.id || `b${idx + 1}`,
+          title:   b.title || '',
+          imageUrl:b.imageUrl || '',
+          enabled: b.enabled !== false,
+          order:   Number.isFinite(b.order) ? b.order : idx + 1,
+        }))
+        .filter((b) => b.imageUrl);
+
+      const res = await fetch(`${BASE_URL}/api/admin/home-banners`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ banners: clean }),
+      });
+
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      banners    = Array.isArray(data.banners) ? data.banners : clean;
+      renderBannersTable();
+      showBannersStatus('تم حفظ البنرات بنجاح ✅', 'success');
+    } catch (err) {
+      console.error(err);
+      showBannersStatus('فشل حفظ البنرات. تأكد أن السيرفر يعمل.', 'danger');
+    }
+  }
+
+  function addNewBannerRow() {
+    banners.push({
+      id:      'b' + (banners.length + 1),
+      title:   'بنر جديد',
+      imageUrl:'',
+      enabled: true,
+      order:   banners.length + 1,
+    });
+    renderBannersTable();
+  }
+
+  btnAddBanner.addEventListener('click', addNewBannerRow);
+  btnSaveBanners.addEventListener('click', saveBanners);
+  loadBanners();
+  </script>
+
+  <!-- ========== سكربت الخدمات ========== -->
+  <script>
+  const servicesBody       = document.getElementById('servicesBody');
+  const emptyServicesState = document.getElementById('emptyServicesState');
+  const statusServices     = document.getElementById('statusServices');
+  const btnAddService      = document.getElementById('btnAddService');
+  const btnSaveServices    = document.getElementById('btnSaveServices');
+
+  let services = [];
+
+  function showServicesStatus(message, type = 'success') {
+    statusServices.innerHTML = `
+      <div class="alert alert-${type} py-2 px-3 mb-0">${message}</div>
+    `;
+    setTimeout(() => { statusServices.innerHTML = ''; }, 4000);
+  }
+
+  async function loadServices() {
+    try {
+      const res  = await fetch(`${BASE_URL}/api/admin/services`);
+      const data = await res.json();
+
+      services = Array.isArray(data.services) ? data.services : [];
+      renderServicesTable();
+      showServicesStatus('تم تحميل الخدمات الحالية.', 'info');
+    } catch (err) {
+      console.error(err);
+      showServicesStatus('حدث خطأ أثناء تحميل الخدمات', 'danger');
+    }
+  }
+
+  function renderServicesTable() {
+    servicesBody.innerHTML = '';
+
+    if (!services.length) {
+      emptyServicesState.classList.remove('d-none');
+      return;
+    }
+    emptyServicesState.classList.add('d-none');
+
+    services
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .forEach((s, idx) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>
+            <input type="text" class="form-control form-control-sm"
+              value="${s.name || ''}" data-field="name" />
+          </td>
+          <td>
+            <textarea class="form-control form-control-sm" data-field="description"
+              rows="2">${s.description || ''}</textarea>
+          </td>
+          <td>
+            <input type="number" class="form-control form-control-sm"
+              value="${s.durationMinutes || 0}" data-field="durationMinutes" min="5" />
+          </td>
+          <td>
+  <select class="form-select form-select-sm" data-field="clinic">
+    <option value="">-- اختر --</option>
+    <option value="derma"   ${s.clinic === 'derma' ? 'selected' : ''}>الجلدية والتجميل</option>
+    <option value="laser"   ${s.clinic === 'laser' ? 'selected' : ''}>عيادة الليزر</option>
+    <option value="clean"   ${s.clinic === 'clean' ? 'selected' : ''}>تنظيف البشرة</option>
+    <option value="women"   ${s.clinic === 'women' ? 'selected' : ''}>نساء وولادة</option>
+    <option value="dental"  ${s.clinic === 'dental' ? 'selected' : ''}>الأسنان</option>
+    <option value="general" ${s.clinic === 'general' ? 'selected' : ''}>طب عام</option>
+  </select>
+</td>   <!-- 🔥 مهم جدًا -->
+
+<td data-col="doctors">
+  <div class="doctor-checkboxes">
+
+    <!-- 🔥 ليزر -->
+<div class="form-check">
+  <input class="form-check-input doc-check" type="checkbox" value="laser_men">
+  <label class="form-check-label">ليزر رجال</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input doc-check" type="checkbox" value="laser_women">
+  <label class="form-check-label">ليزر نساء</label>
+</div>
+
+
+    <div class="form-check">
+      <input class="form-check-input doc-check" type="checkbox" value="d_ryan">
+      <label class="form-check-label">د. ريان</label>
+    </div>
+    
+        <div class="form-check">
+      <input class="form-check-input doc-check" type="checkbox" value="d_ahmed_pm">
+      <label class="form-check-label">د. أحمد عبدالله خليل</label>
+    </div>
+
+
+    <div class="form-check">
+      <input class="form-check-input doc-check" type="checkbox" value="d_ronaldo">
+      <label class="form-check-label">د. رونالدو</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input doc-check" type="checkbox" value="d_abeer">
+      <label class="form-check-label">د. عبير</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input doc-check" type="checkbox" value="d_moath">
+      <label class="form-check-label">د. معاذ</label>
+    </div>
+
+    <small class="small-muted d-block mt-1">
+     
+    </small>
+  </div>
+</td>
+
+
+
+
+
+          <td>
+            <img src="${s.imageUrl || ''}" class="banner-img-thumb mb-1"
+              onerror="this.src='https://via.placeholder.com/150x86?text=No+Image';" />
+            <input type="file" class="form-control form-control-sm service-file-input mt-1" accept="image/*" />
+            <button class="btn btn-sm btn-outline-primary btn-upload-service mt-1">
+              رفع صورة
+            </button>
+            <input type="text" class="form-control form-control-sm mt-1"
+              value="${s.imageUrl || ''}" data-field="imageUrl" />
+          </td>
+          <td class="text-center">
+            <input type="checkbox" data-field="enabled" ${s.enabled !== false ? 'checked' : ''} />
+          </td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-danger btn-remove-service">حذف</button>
+          </td>
+        `;
+         // === ربط العيادة بظهور/إخفاء عمود الأطباء (خاص بالأسنان فقط) ===
+// ربط العيادة بظهور/إخفاء عمود الأطباء (خاص بالأسنان فقط)
+const clinicSelect = tr.querySelector('select[data-field="clinic"]');
+const doctorChecks = tr.querySelectorAll('.doc-check');
+
+function syncDoctorChecks() {
+  doctorChecks.forEach((chk) => {
+    chk.checked = s.doctorIds?.includes(chk.value);
+  });
+}
+
+function updateDoctorIdsFromUI() {
+  services[idx].doctorIds = Array.from(doctorChecks)
+    .filter((c) => c.checked)
+    .map((c) => c.value);
+}
+
+doctorChecks.forEach((chk) => {
+  chk.addEventListener('change', updateDoctorIdsFromUI);
+});
+
+// مبدئياً نضبط حالة الـ checkboxes
+syncDoctorChecks();
+
+const doctorsTd    = tr.querySelector('td[data-col="doctors"]');
+const doctorsSel   = tr.querySelector('select[data-field="doctorIds"]');
+
+function updateDoctorCellState() {
+  const clinicVal = clinicSelect.value;
+
+  doctorChecks.forEach((c) => {
+    c.disabled = true;
+    c.checked = services[idx].doctorIds?.includes(c.value) || false;
+  });
+
+  if (clinicVal === 'laser') {
+    doctorChecks.forEach((c) => {
+      if (c.value === 'laser_men' || c.value === 'laser_women') {
+        c.disabled = false;
+      }
+    });
+  }
+  else if (clinicVal === 'dental') {
+    doctorChecks.forEach((c) => {
+      if (c.value.startsWith('d_')) {
+        c.disabled = false;
+      }
+    });
+  }
+}
+
+
+
+
+
+// أول رسم للصف
+updateDoctorCellState();
+
+// عند تغيير العيادة
+clinicSelect.addEventListener('change', () => {
+  services[idx].clinic = clinicSelect.value;
+  updateDoctorCellState();
+});
+
+
+
+        tr.querySelectorAll('input[data-field], textarea[data-field], select[data-field]').forEach((input) => {
+          input.addEventListener('change', () => {
+            const field = input.dataset.field;
+
+            if (field === 'enabled') {
+              services[idx][field] = input.checked;
+            }
+            else if (field === 'doctorIds') {
+              services[idx][field] = Array.from(input.selectedOptions).map((o) => o.value);
+            }
+            else if (field === 'durationMinutes') {
+              services[idx][field] = parseInt(input.value) || 0;
+            }
+            else {
+              services[idx][field] = input.value;
+            }
+          });
+        });
+
+        tr.querySelector('.btn-remove-service').addEventListener('click', () => {
+          services.splice(idx, 1);
+          renderServicesTable();
+        });
+
+        const fileInput = tr.querySelector('.service-file-input');
+        const uploadBtn = tr.querySelector('.btn-upload-service');
+        const imageInput = tr.querySelector('input[data-field="imageUrl"]');
+        const imgThumb   = tr.querySelector('img');
+
+        uploadBtn.addEventListener('click', async () => {
+          const file = fileInput.files[0];
+          if (!file) return alert("اختر صورة أولاً");
+
+          const fd = new FormData();
+          fd.append('file', file);
+
+          uploadBtn.disabled = true;
+          uploadBtn.textContent = 'جاري الرفع...';
+
+          try {
+            const res  = await fetch(`${BASE_URL}/api/content/upload-image`, {
+              method: 'POST',
+              body: fd
+            });
+            const data = await res.json();
+
+            if (data.ok && data.url) {
+              let relative = normalizeUploadedUrl(data.url);
+              relative = relative.replace(/\/+$/,'');
+              if (!relative.startsWith('/')) relative = '/' + relative;
+              if (!relative.startsWith('/uploads/')) {
+                const fname = relative.split('/').pop() || '';
+                relative = '/uploads/' + fname;
+              }
+
+              imageInput.value       = relative;
+              services[idx].imageUrl = relative;
+              imgThumb.src           = relative;
+
+              showServicesStatus('تم رفع الصورة بنجاح', 'success');
+            } else {
+              alert('فشل رفع الصورة');
+            }
+          } catch (e) {
+            console.error(e);
+            alert('خطأ في رفع الصورة');
+          }
+
+          uploadBtn.disabled = false;
+          uploadBtn.textContent = 'رفع صورة';
+        });
+
+        servicesBody.appendChild(tr);
+      });
+  }
+
+  function addNewServiceRow() {
+    services.push({
+      id: 'srv_' + (services.length + 1),
+      name: 'خدمة جديدة',
+      description: '',
+      durationMinutes: 30,
+      clinic: '',
+      doctorIds: [],
+      imageUrl: '',
+      enabled: true,
+      order: services.length + 1
+    });
+    renderServicesTable();
+  }
+
+  async function saveServices() {
+    try {
+      const res = await fetch(`${BASE_URL}/api/admin/services`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ services }),
+      });
+
+      const data = await res.json();
+      services = data.services || services;
+      showServicesStatus("تم حفظ الخدمات بنجاح", "success");
+      renderServicesTable();
+    } catch (err) {
+      console.error(err);
+      showServicesStatus("فشل حفظ الخدمات", "danger");
+    }
+  }
+
+  btnAddService.addEventListener('click', addNewServiceRow);
+  btnSaveServices.addEventListener('click', saveServices);
+  loadServices();
+  </script>
+
+  <!-- ========== سكربت إرسال إشعار FCM جماعي ========== -->
+  <script>
+  const fcmStatus = document.getElementById('fcmStatus');
+
+  function showFcmStatus(message, type = 'success') {
+    fcmStatus.innerHTML = `
+      <div class="alert alert-${type} py-2 px-3 mb-0">${message}</div>
+    `;
+    setTimeout(() => {
+      fcmStatus.innerHTML = '';
+    }, 4000);
+  }
+
+  async function sendFcmBroadcast() {
+    const title = document.getElementById('fcmTitle').value.trim();
+    const body  = document.getElementById('fcmBody').value.trim();
+
+    if (!body) {
+      showFcmStatus('اكتب نص الإشعار أولاً', 'warning');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${BASE_URL}/api/admin/broadcast-fcm`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, body }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        console.error('FCM error:', data);
+        showFcmStatus('تعذّر إرسال الإشعار، حاول مرة أخرى', 'danger');
+        return;
+      }
+
+      showFcmStatus('تم إرسال الإشعار لجميع المستخدمين ✅', 'success');
+      document.getElementById('fcmBody').value = '';
+    } catch (err) {
+      console.error(err);
+      showFcmStatus('خطأ في الاتصال بالسيرفر', 'danger');
+    }
+  }
+  </script>
+
+  <!-- ===== سكربت التبويبات ===== -->
+  <script>
+    const tabs = document.querySelectorAll('#sectionTabs .nav-link');
+    const sections = document.querySelectorAll('.admin-section');
+
+    tabs.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.section;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+
+        sections.forEach(sec => {
+          if (sec.dataset.section === target) {
+            sec.classList.add('active');
+          } else {
+            sec.classList.remove('active');
+          }
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+  <script>
+(function () {
+  const token = localStorage.getItem('adminToken');
+  const loginAt = Number(localStorage.getItem('adminLoginAt'));
+  const EIGHT_HOURS = 8 * 60 * 60 * 1000;
+
+  if (token && loginAt && (Date.now() - loginAt) < EIGHT_HOURS) {
+    // ✅ جلسة صالحة
+    document.addEventListener('DOMContentLoaded', () => {
+      const lock = document.getElementById('adminLock');
+      if (lock) lock.remove();
+    });
+  } else {
+    // ❌ انتهت الجلسة
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminLoginAt');
+  }
+})();
+</script>
+
+  <script>
+let adminTx = null;
+
+async function startAdminAuth() {
+  const btn = document.getElementById('lockBtn');
+btn.disabled = true;
+
+  const pin = document.getElementById('adminPin').value.trim();
+  const otpInput = document.getElementById('adminOtp');
+  const msg = document.getElementById('lockMsg');
+
+  msg.textContent = '';
+
+  try {
+    // المرحلة 1: PIN
+    if (!adminTx) {
+      const res = await fetch(`${BASE_URL}/api/admin/auth/start`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'PIN error');
+
+      adminTx = data.tx;
+      otpInput.classList.remove('d-none');
+      document.getElementById('adminPin').disabled = true;
+      msg.textContent = 'تم إرسال رمز التحقق للجوال';
+btn.disabled = false;   // ✅ إعادة تفعيل الزر
+return;
+
+    }
+
+    // المرحلة 2: OTP
+    const code = otpInput.value.trim();
+    const res = await fetch(`${BASE_URL}/api/admin/auth/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, tx: adminTx }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'OTP error');
+
+    localStorage.setItem('adminToken', data.token);
+localStorage.setItem('adminLoginAt', Date.now().toString());
+document.getElementById('adminLock').remove();
+
+
+  } catch (e) {
+     btn.disabled = false;
+    msg.textContent = e.message || 'خطأ في التحقق';
+
+  }
+}
+</script>
+<script>
+(function () {
+  const _fetch = window.fetch;
+  window.fetch = function (input, init = {}) {
+    const token = localStorage.getItem('adminToken');
+
+    // نضيف التوكن فقط لطلبات الأدمن
+    if (token && typeof input === 'string' && input.includes('/api/admin/')) {
+      init.headers = {
+        ...(init.headers || {}),
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
+    return _fetch(input, init);
+  };
+})();
+</script>
+
+</body>
+</html>

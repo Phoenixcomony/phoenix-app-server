@@ -1,0 +1,89 @@
+[
+  {
+    "id": "srv_1",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "laser",
+    "doctorIds": [
+      "laser_women"
+    ],
+    "imageUrl": "/uploads/Screenshot2025-10-10163427-1765807297130-546192022.png",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "srv_2",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "laser",
+    "doctorIds": [
+      "laser_men"
+    ],
+    "imageUrl": "/uploads/Screenshot2025-10-10173910-1765809672812-767957823.png",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "srv_3",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "derma",
+    "doctorIds": [],
+    "imageUrl": "/uploads/Screenshot2025-10-09204043-1765882402911-242340113.png",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "srv_4",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "clean",
+    "doctorIds": [],
+    "imageUrl": "/uploads/Screenshot2025-10-12185001-1765882412929-328943585.png",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "srv_5",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "women",
+    "doctorIds": [],
+    "imageUrl": "/uploads/Screenshot2025-10-10163427-1765882425766-582414984.png",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "srv_6",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "dental",
+    "doctorIds": [
+      "d_ryan",
+      "d_ahmed_pm",
+      "d_ronaldo",
+      "d_abeer",
+      "d_moath"
+    ],
+    "imageUrl": "/uploads/Screenshot2025-10-10163427-1765882439310-529059443.png",
+    "enabled": true,
+    "order": 6
+  },
+  {
+    "id": "srv_7",
+    "name": "خدمة جديدة",
+    "description": "",
+    "durationMinutes": 30,
+    "clinic": "general",
+    "doctorIds": [],
+    "imageUrl": "/uploads/6-1765882461217-468726086.jpg",
+    "enabled": true,
+    "order": 7
+  }
+]

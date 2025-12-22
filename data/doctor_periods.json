@@ -1,0 +1,164 @@
+{
+  "d_walaa": [
+    {
+      "id": "p1",
+      "label": "الفترة المسائية",
+      "from": "15:00",
+      "to": "20:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_hasnaa": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "09:00",
+      "to": "11:30",
+      "enabled": true,
+      "allowFriday": false
+    },
+    {
+      "id": "p2",
+      "label": "فترة جديدة",
+      "from": "16:00",
+      "to": "21:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_clean_pm": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "15:00",
+      "to": "21:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_ryan": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "09:00",
+      "to": "10:30",
+      "enabled": true,
+      "allowFriday": false
+    },
+    {
+      "id": "p2",
+      "label": "فترة جديدة",
+      "from": "15:00",
+      "to": "20:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_abeer": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "09:00",
+      "to": "11:30",
+      "enabled": true,
+      "allowFriday": false
+    },
+    {
+      "id": "p2",
+      "label": "فترة جديدة",
+      "from": "16:00",
+      "to": "21:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_general": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "09:00",
+      "to": "11:30",
+      "enabled": true,
+      "allowFriday": false
+    },
+    {
+      "id": "p2",
+      "label": "فترة جديدة",
+      "from": "16:00",
+      "to": "21:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_laser_am": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "09:00",
+      "to": "11:00",
+      "enabled": true,
+      "allowFriday": true
+    }
+  ],
+  "d_laser_pm": [
+    {
+      "id": "p1",
+      "label": " جديفترةدة",
+      "from": "13:00",
+      "to": "23:00",
+      "enabled": true,
+      "allowFriday": true
+    }
+  ],
+  "d_ronaldo": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "16:00",
+      "to": "21:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_moath": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "14:00",
+      "to": "22:00",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_ahmed_pm": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "13:00",
+      "to": "20:30",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_laser_men_am": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "09:00",
+      "to": "23:00",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ],
+  "d_laser_women_pm": [
+    {
+      "id": "p1",
+      "label": "فترة جديدة",
+      "from": "13:00",
+      "to": "23:00",
+      "enabled": true,
+      "allowFriday": false
+    }
+  ]
+}
