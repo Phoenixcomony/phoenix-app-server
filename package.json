@@ -11,7 +11,8 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^4.19.2",
-    "ioredis": "^5.8.1"
+    "ioredis": "^5.8.1",
+    "firebase-admin": "^12.0.0"
   }
 }
 
