@@ -12,6 +12,7 @@
     "dotenv": "^17.2.3",
     "express": "^4.19.2",
     "firebase-admin": "^12.7.0",
-    "ioredis": "^5.8.1"
+    "ioredis": "^5.8.1",
+    "nanoid": "^5.1.6"
   }
 }
